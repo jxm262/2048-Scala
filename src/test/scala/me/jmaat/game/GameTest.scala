@@ -6,6 +6,7 @@ import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class GameTest extends FunSuite {
+  import Game._
 
   trait testLists {
     val nums1 = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
@@ -16,15 +17,65 @@ class GameTest extends FunSuite {
     val nums6 = List(1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1)
     val nums7 = List(0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0)
 
+    val numsd = List(3, 1, 1, 1, 3, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2)
+  }
+
+  /*
+   	 3, 1, 1, 1  to  6, 2, 2, 2
+	 3, 1, 1, 1		 4, 4, 4, 4
+	 2, 2, 2, 2		 0, 0, 0, 0
+	 2, 2, 2, 2		 0, 0, 0, 0
+   */
+  test("move up, all cells calculate") {
+    val nums = List(3, 1, 1, 1, 3, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2)
+    assert(move("up", nums) === List(6, 2, 2, 2, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0))
+  }
+
+  /*
+   	 3, 1, 1, 1  to  6, 2, 2, 2
+	 3, 1, 1, 1		 0, 0, 0, 0
+	 0, 0, 0, 0		 0, 0, 0, 0
+	 0, 0, 0, 0		 0, 0, 0, 0
+   */
+  test("move up, top 2 rows only calculate") {
+    val nums = List(3, 1, 1, 1, 3, 1, 1, 1, 0, 0, 0, 0,0, 0, 0, 0)
+    assert(move("up", nums) === List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
   }
   
-  val nums = List(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)
+  /*
+   	 0, 0, 0, 0  to  6, 2, 2, 2
+	 0, 0, 0, 0		 0, 0, 0, 0
+	 3, 1, 1, 1		 0, 0, 0, 0
+	 3, 1, 1, 1		 0, 0, 0, 0
+   */
+  test("move up, bottom 2 rows only calculate") {
+    val nums = List(0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 3, 1, 1, 1)
+    assert(move("up", nums) === List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+  }  
+
+  /*
+   	 3, 1, 1, 1  to  6, 2, 2, 2
+	 0, 0, 0, 0		 0, 0, 0, 0
+	 0, 0, 0, 0		 0, 0, 0, 0
+	 3, 1, 1, 1		 0, 0, 0, 0
+   */
+  test("move up, top and bottom rows only calculate") {
+    val nums = List(3, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1)
+    assert(move("up", nums) === List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+  } 
   
-  test("dummy test") {
-   new testLists{
-    
-//     println(move("up", nums2))
-//	   assert("hello" === "hello")
-   }
-  }
+  /*
+   	 0, 0, 0, 0  to  6, 2, 2, 2
+	 3, 1, 1, 1		 0, 0, 0, 0
+	 3, 1, 1, 1		 0, 0, 0, 0
+	 0, 0, 0, 0		 0, 0, 0, 0
+   */
+  test("move up, middle 2 rows only calculate") {
+    val nums = List(0, 0, 0, 0, 3, 1, 1, 1, 3, 1, 1, 1, 0, 0, 0, 0)
+    assert(move("up", nums) === List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+  } 
+  
+  
 } 
+
+

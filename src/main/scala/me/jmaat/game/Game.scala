@@ -30,14 +30,22 @@ object Game {
     calcAcc(nums.filter(p => p != 0).reverse, List())
   }
 
-  def move(direction: String, nums: List[Int]): List[List[Int]] = {
-    for {
+  def move(direction: String, nums: List[Int]): List[Int] = {
+    val sum = (for {
       x <- direction match {
         case "up" => up(nums)
         case "down" => down(nums)
         case "left" => left(nums)
         case "right" => right(nums)
       }
-    } yield (calc(x))
+    } yield (calc(x))).flatten
+
+    direction match {
+      case "up" => up(sum).flatten.reverse
+      case "down" => down(sum).flatten
+      case "left" => left(sum).flatten.reverse
+      case "right" => right(sum).flatten
+    }
+
   }
 }
