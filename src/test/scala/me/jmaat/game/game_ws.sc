@@ -1,5 +1,7 @@
 package justin
   
+import scala.util._
+  
 object game_ws {
 
 
@@ -34,39 +36,44 @@ object game_ws {
                                                   //| 5)
   val nums2 = List(3, 3, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
                                                   //> nums2  : List[Int] = List(3, 3, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+  def right(nums: List[Int]): List[List[Int]] = nums.grouped(4).toList
+                                                  //> right: (nums: List[Int])List[List[Int]]
   
-def left(nums: List[Int]): List[List[Int]] = nums.reverse.grouped(4).toList.reverse
-                                                  //> left: (nums: List[Int])List[List[Int]]
-  
-  val n = left(nums2)                             //> n  : List[List[Int]] = List(List(1, 1, 3, 3), List(2, 2, 2, 2), List(2, 2, 2
+  val n = right(nums2)                            //> n  : List[List[Int]] = List(List(3, 3, 1, 1), List(2, 2, 2, 2), List(2, 2, 2
                                                   //| , 2), List(2, 2, 2, 2))
   
-  calc(n(0))                                      //> res0: List[Int] = List(0, 0, 2, 6)
+  calc(n(0))                                      //> res0: List[Int] = List(0, 0, 6, 2)
  
   val d =
   	(for {
-      x <- left(nums2)
-     } yield (calc(x))).flatten                   //> d  : List[Int] = List(0, 0, 2, 6, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4)
+      x <- right(nums2)
+     } yield (calc(x))).flatten                   //> d  : List[Int] = List(0, 0, 6, 2, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4)
   
   //up(d).flatten.reverse
 	//down(d).flatten
-	left(d).flatten                           //> res1: List[Int] = List(6, 2, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0)
+	val calced = right(d).flatten             //> calced  : List[Int] = List(0, 0, 6, 2, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4)
+                                                  //| 
+	calced.zipWithIndex                       //> res1: List[(Int, Int)] = List((0,0), (0,1), (6,2), (2,3), (0,4), (0,5), (4,
+                                                  //| 6), (4,7), (0,8), (0,9), (4,10), (4,11), (0,12), (0,13), (4,14), (4,15))
 	
-	/**
-	 3, 1, 1, 1
-	 3, 1, 1, 1
-	 2, 2, 2, 2
-	 2, 2, 2, 2
-	 
-	 0, 0, 0, 0
-	 0, 0, 0, 0
-	 6, 2, 2, 2
-	 4, 4, 4, 4
+	val c = calced.zipWithIndex.filter(_._1 == 0).map(_._2)
+                                                  //> c  : List[Int] = List(0, 1, 4, 5, 8, 9, 12, 13)
+  c(8)                                            //> java.lang.IndexOutOfBoundsException: 8
+                                                  //| 	at scala.collection.LinearSeqOptimized$class.apply(LinearSeqOptimized.sc
+                                                  //| ala:52)
+                                                  //| 	at scala.collection.immutable.List.apply(List.scala:84)
+                                                  //| 	at justin.game_ws$$anonfun$main$1.apply$mcV$sp(justin.game_ws.scala:52)
+                                                  //| 
+                                                  //| 	at org.scalaide.worksheet.runtime.library.WorksheetSupport$$anonfun$$exe
+                                                  //| cute$1.apply$mcV$sp(WorksheetSupport.scala:76)
+                                                  //| 	at org.scalaide.worksheet.runtime.library.WorksheetSupport$.redirected(W
+                                                  //| orksheetSupport.scala:65)
+                                                  //| 	at org.scalaide.worksheet.runtime.library.WorksheetSupport$.$execute(Wor
+                                                  //| ksheetSupport.scala:75)
+                                                  //| 	at justin.game_ws$.main(justin.game_ws.scala:5)
+                                                  //| 	at justin.game_ws.main(justin.game_ws.scala)
+  
+	val z = new Random(5)
+	z.nextInt()
 	
-	 6, 2, 2, 2
-	 4, 4, 4, 4
-	 0, 0, 0, 0
-	 0, 0, 0, 0
-	 
-	*/
 }

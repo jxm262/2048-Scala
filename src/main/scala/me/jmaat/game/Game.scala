@@ -1,5 +1,7 @@
 package me.jmaat.game
 
+import scala.util.Random
+
 object Game {
 
   def printNums(l: List[Int]) = for (x <- l.grouped(4).toList) {
@@ -43,9 +45,18 @@ object Game {
     direction match {
       case "up" => up(sum).flatten.reverse
       case "down" => down(sum).flatten
-      case "right" => right(sum).flatten.reverse
+      case "right" => right(sum).flatten
       case "left" => left(sum).flatten
     }
-
   }
+  
+  val random = new Random
+  
+  def insertRandom(nums: List[Int]): List[Int] = {
+    val zeros = nums.zipWithIndex.filter(_._1 == 0).map(_._2)
+    val randomIdx = zeros(random.nextInt(zeros.length - 1))
+    
+    nums updated (randomIdx, 2)
+  }
+  
 }
