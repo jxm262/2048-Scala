@@ -74,6 +74,62 @@ class GameTest extends FunSuite {
     val nums = List(0, 0, 0, 0, 3, 1, 1, 1, 3, 1, 1, 1, 0, 0, 0, 0)
     assert(move("up", nums) === List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
   } 
+ 
+  /////////////////
+  /*
+   	 3, 1, 1, 1  to  0, 0, 0, 0
+	 3, 1, 1, 1		 0, 0, 0, 0
+	 2, 2, 2, 2		 6, 2, 2, 2
+	 2, 2, 2, 2		 4, 4, 4, 4
+   */
+  test("move down, all cells calculate") {
+    val nums = List(3, 1, 1, 1, 3, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2)
+    assert(move("down", nums) === List(0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2, 4, 4, 4, 4))
+  }
+
+  /*
+   	 3, 1, 1, 1  to  0, 0, 0, 0
+	 3, 1, 1, 1		 0, 0, 0, 0
+	 0, 0, 0, 0		 0, 0, 0, 0
+	 0, 0, 0, 0		 6, 2, 2, 2
+   */
+  test("move down, top 2 rows only calculate") {
+    val nums = List(3, 1, 1, 1, 3, 1, 1, 1, 0, 0, 0, 0,0, 0, 0, 0)
+    assert(move("down", nums) === List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2))
+  }
+  
+  /*
+   	 0, 0, 0, 0  to  0, 0, 0, 0
+	 0, 0, 0, 0		 0, 0, 0, 0
+	 3, 1, 1, 1		 0, 0, 0, 0
+	 3, 1, 1, 1		 6, 2, 2, 2
+   */
+  test("move down, bottom 2 rows only calculate") {
+    val nums = List(0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 3, 1, 1, 1)
+    assert(move("down", nums) === List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2))
+  }  
+
+  /*
+   	 3, 1, 1, 1  to  0, 0, 0, 0
+	 0, 0, 0, 0		 0, 0, 0, 0
+	 0, 0, 0, 0		 0, 0, 0, 0
+	 3, 1, 1, 1		 6, 2, 2, 2
+   */
+  test("move down, top and bottom rows only calculate") {
+    val nums = List(3, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1)
+    assert(move("down", nums) === List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2))
+  } 
+  
+  /*
+   	 0, 0, 0, 0  to  0, 0, 0, 0
+	 3, 1, 1, 1		 0, 0, 0, 0
+	 3, 1, 1, 1		 0, 0, 0, 0
+	 0, 0, 0, 0		 6, 2, 2, 2
+   */
+  test("move down, middle 2 rows only calculate") {
+    val nums = List(0, 0, 0, 0, 3, 1, 1, 1, 3, 1, 1, 1, 0, 0, 0, 0)
+    assert(move("down", nums) === List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2))
+  } 
   
   
 } 
