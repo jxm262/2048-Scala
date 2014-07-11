@@ -43,8 +43,8 @@ object Game {
     direction match {
       case "up" => up(sum).flatten.reverse
       case "down" => down(sum).flatten
-      case "left" => left(sum).flatten.reverse
-      case "right" => right(sum).flatten
+      case "right" => right(sum).flatten.reverse
+      case "left" => left(sum).flatten
     }
 
   }

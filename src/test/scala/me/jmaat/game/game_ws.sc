@@ -32,32 +32,25 @@ object game_ws {
 	val nums = List(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15)
                                                   //> nums  : List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1
                                                   //| 5)
-  val nums2 = List(3,1,1,1,3,1,1,1,2,2,2,2,2,2,2,2)
-                                                  //> nums2  : List[Int] = List(3, 1, 1, 1, 3, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2)
+  val nums2 = List(3, 3, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+                                                  //> nums2  : List[Int] = List(3, 3, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
   
-  def up(nums: List[Int]): List[List[Int]] = (for {
-    x <- 0 to 3
-    y <- x to 15 by 4
-  } yield (nums(y))).toList.reverse.grouped(4).toList.reverse
-                                                  //> up: (nums: List[Int])List[List[Int]]
-  def down(nums: List[Int]): List[List[Int]] = (for {
-    x <- 0 to 3
-    y <- x to 15 by 4
-  } yield (nums(y))).toList.grouped(4).toList     //> down: (nums: List[Int])List[List[Int]]
+def left(nums: List[Int]): List[List[Int]] = nums.reverse.grouped(4).toList.reverse
+                                                  //> left: (nums: List[Int])List[List[Int]]
   
-  val n = down(nums2)                             //> n  : List[List[Int]] = List(List(3, 3, 2, 2), List(1, 1, 2, 2), List(1, 1, 
-                                                  //| 2, 2), List(1, 1, 2, 2))
+  val n = left(nums2)                             //> n  : List[List[Int]] = List(List(1, 1, 3, 3), List(2, 2, 2, 2), List(2, 2, 2
+                                                  //| , 2), List(2, 2, 2, 2))
   
-  calc(n(0))                                      //> res0: List[Int] = List(0, 0, 6, 4)
+  calc(n(0))                                      //> res0: List[Int] = List(0, 0, 2, 6)
  
   val d =
   	(for {
-      x <- up(nums2)
-     } yield (calc(x))).flatten                   //> d  : List[Int] = List(0, 0, 4, 6, 0, 0, 4, 2, 0, 0, 4, 2, 0, 0, 4, 2)
+      x <- left(nums2)
+     } yield (calc(x))).flatten                   //> d  : List[Int] = List(0, 0, 2, 6, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4)
   
   //up(d).flatten.reverse
 	//down(d).flatten
-	up(d).flatten.reverse                     //> res1: List[Int] = List(6, 2, 2, 2, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0)
+	left(d).flatten                           //> res1: List[Int] = List(6, 2, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0)
 	
 	/**
 	 3, 1, 1, 1
