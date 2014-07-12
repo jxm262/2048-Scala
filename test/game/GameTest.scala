@@ -1,4 +1,4 @@
-package me.jmaat.game
+package game
 
 import org.scalatest.FunSuite
 import org.junit.runner.RunWith
