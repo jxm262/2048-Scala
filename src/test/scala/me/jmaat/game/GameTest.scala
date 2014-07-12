@@ -218,11 +218,9 @@ class GameTest extends FunSuite {
       && insertRandom(moveD).filter(_ == 2).length == 3)
   }
 
-  test("move up, insert random 2") {
-    val nums = List(0, 3, 3, 0, 0, 3, 3, 0, 0, 1, 1, 0, 0, 1, 1, 0)
-    val moveU = move("up", nums)
-    assert(insertRandom(moveU).filter(_ == 0).length == 11
-      && insertRandom(moveU).filter(_ == 2).length == 3)
+  test("insert random on full list") {
+    val nums = List(4, 3, 3, 4, 4, 3, 3, 4, 4, 1, 1, 4, 4, 1, 1, 4)
+    assert(insertRandom(nums).filter(_ == 2).length === 0)
   }
 } 
 

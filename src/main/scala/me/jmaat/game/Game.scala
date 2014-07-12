@@ -1,9 +1,12 @@
 package me.jmaat.game
 
+
 import scala.util.Random
 
 object Game {
 
+  val random = new Random
+    
   def printNums(l: List[Int]) = for (x <- l.grouped(4).toList) {
     println(x mkString ",\t")
   }
@@ -32,6 +35,7 @@ object Game {
     calcAcc(nums.filter(p => p != 0).reverse, List())
   }
 
+  //TODO: generalize this pattern matching
   def move(direction: String, nums: List[Int]): List[Int] = {
     val sum = (for {
       x <- direction match {
@@ -50,13 +54,13 @@ object Game {
     }
   }
   
-  val random = new Random
-  
   def insertRandom(nums: List[Int]): List[Int] = {
     val zeros = nums.zipWithIndex.filter(_._1 == 0).map(_._2)
-    val randomIdx = zeros(random.nextInt(zeros.length - 1))
     
-    nums updated (randomIdx, 2)
+    if (zeros.nonEmpty) nums updated (zeros(random.nextInt(zeros.length - 1)), 2)
+    else nums
   }
+  
+  def next(direction: String, nums: List[Int]) = insertRandom(move(direction, nums))
   
 }
