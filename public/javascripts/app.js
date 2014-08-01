@@ -1,0 +1,4 @@
+/**
+ * Application custom JS
+ */
+

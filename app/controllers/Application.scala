@@ -12,27 +12,27 @@ object Application extends Controller {
       
   def printNums(l: List[Int]) = ((for (x <- l.grouped(4).toList) yield (x mkString ",\t")) mkString "\n")
   def index = Action {
-    //    Ok(views.html.index("Your new application is ready."))
+        Ok(views.html.index("Your new application is ready."))
 	 
-    reset()
-    
-    val step0 = printNums(nums)
-    
-    nums = next("up", nums)
-    val step1 = printNums(nums)
-
-    nums = next("up", nums)
-    val step3 = printNums(nums)
-	
-    nums = next("up", nums)
-	val step5 = printNums(nums)
-    
-	nums = next("up", nums)
-	val step7 = printNums(nums)
-	
-	val res = step0 + "\n\n\n" + step1  + "\n\n\n" + step3 + "\n\n\n" + step5 + "\n\n\n" + step7
-	
-    Ok(res)
+//    reset()
+//    
+//    val step0 = printNums(nums)
+//    
+//    nums = next("up", nums)
+//    val step1 = printNums(nums)
+//
+//    nums = next("up", nums)
+//    val step3 = printNums(nums)
+//	
+//    nums = next("up", nums)
+//	val step5 = printNums(nums)
+//    
+//	nums = next("up", nums)
+//	val step7 = printNums(nums)
+//	
+//	val res = step0 + "\n\n\n" + step1  + "\n\n\n" + step3 + "\n\n\n" + step5 + "\n\n\n" + step7
+//	
+//    Ok(res)
   }
 
 }
