@@ -13,7 +13,7 @@ object Application extends Controller {
     (JsPath \ "numbers").read[List[Int]]
   }.tupled
   
-  def test = Action(parse.json) { request => 
+  def move = Action(parse.json) { request => 
    request.body.validate(gameRequest).map{ 
       case (direction, numbers) => 
         Ok(Json.obj("numbers" -> next(direction, numbers) ))  

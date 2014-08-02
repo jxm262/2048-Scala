@@ -23,12 +23,14 @@ nums[randomPos] = 2;
 	
 		$.ajax({
 			  type: "POST",
-			  url: "/test",
+			  url: "/move",
 			  contentType: "application/json; charset=utf-8",
 			  data: JSON.stringify({direction: getDirection(), numbers: nums}),
 			  dataType: "json",
 			  success: function(data, textStatus, jqXHR){
 				  nums = data.numbers;
+				  
+				  console.log("\n\n");
 				  
 				  for(var i=0; i < 16; i+=4){
 					 console.log(nums[i] + "\t" + nums[i+1] + "\t" + nums[i+2] + "\t" + nums[i+3]);
