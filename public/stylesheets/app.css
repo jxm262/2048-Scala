@@ -1,0 +1,49 @@
+/**
+* Custom global
+*/
+
+.dummy {
+    margin-top: 100%;
+}
+.thumbnail {
+    position: absolute;
+    top: 15px;
+    bottom: 0;
+    left: 15px;
+    right: 0;
+    text-align:center;
+    padding-top:calc(50% - 20px);
+}
+
+
+body{
+	margin-bottom: 40px;
+}
+.dummy {
+    margin-top: 100%;
+}
+.in {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.red{
+    background-color: red;
+}
+.green{
+    background-color: green;
+}
+.yellow{
+    background-color: yellow;
+}
+.blue{
+    background-color: blue;
+}
+.gray{
+    background-color: gray;
+}
+.magenta{
+    background-color: magenta;
+}
