@@ -47,3 +47,7 @@ body{
 .magenta{
     background-color: magenta;
 }
+
+.no-gutter [class*="-6"] {
+    padding-left:0;
+}
