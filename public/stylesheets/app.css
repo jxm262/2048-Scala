@@ -28,6 +28,7 @@ body{
     bottom: 0;
     left: 0;
     right: 0;
+    border: 6px solid #555;
 }
 .red{
     background-color: red;
@@ -50,4 +51,12 @@ body{
 
 .no-gutter [class*="-6"] {
     padding-left:0;
+}
+
+.center-x {
+	text-align: center;
+}
+
+.center-y {
+	vertical-align: middle;
 }

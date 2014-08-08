@@ -4,7 +4,7 @@
 
 var randomPos = (Math.ceil(Math.random() * 16)) - 1 ;
 var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-nums[randomPos] = 2;
+//nums[randomPos] = 2;
 
 (function(){
 	
@@ -16,10 +16,11 @@ nums[randomPos] = 2;
 				case 38: return "up";
 				case 39: return "right";
 				case 40: return "down";
-				default: return;
 			}
 		}
 		e.preventDefault();
+		
+			
 	
 		$.ajax({
 			  type: "POST",
@@ -29,12 +30,19 @@ nums[randomPos] = 2;
 			  dataType: "json",
 			  success: function(data, textStatus, jqXHR){
 				  nums = data.numbers;
-				  
-				  console.log("\n\n");
-				  
-				  for(var i=0; i < 16; i+=4){
-					 console.log(nums[i] + "\t" + nums[i+1] + "\t" + nums[i+2] + "\t" + nums[i+3]);
-				  }
+				  window.justin = nums;
+				  console.log(justin);
+				  $("h1").each(function(idx){
+					 var num = (nums[idx] == 0) ? '' : nums[idx];
+					 
+					 var r = 250 - (2 * num);
+					 var g = 250 - (3 * num);
+					 var b = 150 - (10 * num);
+					 var rgb = "rgb(" + r +  "," + g + "," + b + ")";
+
+					 $(this).parent().css("background-color", rgb);
+					 $(this).replaceWith("<h1>" + num + "</h1>");
+				  });
 			  },
 			  error: function(jqXHR, textStatus, errorThrown){
 				  console.log("fail");
