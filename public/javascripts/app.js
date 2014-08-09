@@ -35,12 +35,7 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 				  $("h1").each(function(idx){
 					 var num = (nums[idx] == 0) ? '' : nums[idx];
 					 
-					 var r = 250 - (2 * num);
-					 var g = 250 - (3 * num);
-					 var b = 150 - (10 * num);
-					 var rgb = "rgb(" + r +  "," + g + "," + b + ")";
-
-					 $(this).parent().css("background-color", rgb);
+					 $(this).parent().css("background-color", getColor(num));
 					 $(this).replaceWith("<h1>" + num + "</h1>");
 				  });
 			  },
@@ -50,4 +45,17 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 			  }
 			});
 	});
+	
+	function getColor(num){
+		
+		//using logarithm to smooth color shading
+		 var colorMultiple = (num == 0) ? 0 : parseInt(Math.pow(Math.ceil(Math.log(num)), 2));
+
+		 var r = 250 - num;
+		 var g = 250 - (20 * colorMultiple);
+		 var b = 250 - (35 * colorMultiple);
+		 
+		 return "rgb(" + r +  "," + g + "," + b + ")";
+	};
+	
 })();
