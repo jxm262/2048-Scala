@@ -15,8 +15,10 @@ object Application extends Controller {
   
   def move = Action(parse.json) { request => 
    request.body.validate(gameRequest).map{ 
-      case (direction, numbers) => 
-        Ok(Json.obj("numbers" -> next(direction, numbers) ))  
+      case (direction, numbers) => {
+    	  val nextNums = next(direction, numbers)
+    	  Ok(Json.obj("numbers" -> nextNums._1, "score" -> nextNums._2 ))  
+      }
     }.recoverTotal{
       e => BadRequest("Detected error:"+ JsError.toFlatJson(e))
     }

@@ -28,7 +28,7 @@ class GameTest extends FunSuite {
    */
   test("move up, all cells calculate") {
     val nums = List(3, 1, 1, 1, 3, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2)
-    assert(move("up", nums) === List(6, 2, 2, 2, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0))
+    assert(move("up", nums) === (List(6, 2, 2, 2, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0), 28))
   }
 
   /*
@@ -39,7 +39,7 @@ class GameTest extends FunSuite {
    */
   test("move up, top 2 rows only calculate") {
     val nums = List(3, 1, 1, 1, 3, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)
-    assert(move("up", nums) === List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+    assert(move("up", nums) === (List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 12))
   }
 
   /*
@@ -50,7 +50,7 @@ class GameTest extends FunSuite {
    */
   test("move up, bottom 2 rows only calculate") {
     val nums = List(0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 3, 1, 1, 1)
-    assert(move("up", nums) === List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+    assert(move("up", nums) === (List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 12))
   }
 
   /*
@@ -61,7 +61,7 @@ class GameTest extends FunSuite {
    */
   test("move up, top and bottom rows only calculate") {
     val nums = List(3, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1)
-    assert(move("up", nums) === List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+    assert(move("up", nums) === (List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 12))
   }
 
   /*
@@ -72,7 +72,7 @@ class GameTest extends FunSuite {
    */
   test("move up, middle 2 rows only calculate") {
     val nums = List(0, 0, 0, 0, 3, 1, 1, 1, 3, 1, 1, 1, 0, 0, 0, 0)
-    assert(move("up", nums) === List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
+    assert(move("up", nums) === (List(6, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 12))
   }
 
   /*
@@ -83,7 +83,7 @@ class GameTest extends FunSuite {
    */
   test("move down, all cells calculate") {
     val nums = List(3, 1, 1, 1, 3, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2)
-    assert(move("down", nums) === List(0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2, 4, 4, 4, 4))
+    assert(move("down", nums) === (List(0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2, 4, 4, 4, 4), 28))
   }
 
   /*
@@ -94,7 +94,7 @@ class GameTest extends FunSuite {
    */
   test("move down, top 2 rows only calculate") {
     val nums = List(3, 1, 1, 1, 3, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)
-    assert(move("down", nums) === List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2))
+    assert(move("down", nums) === (List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2), 12))
   }
 
   /*
@@ -105,7 +105,7 @@ class GameTest extends FunSuite {
    */
   test("move down, bottom 2 rows only calculate") {
     val nums = List(0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1, 3, 1, 1, 1)
-    assert(move("down", nums) === List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2))
+    assert(move("down", nums) === (List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2), 12))
   }
 
   /*
@@ -116,7 +116,7 @@ class GameTest extends FunSuite {
    */
   test("move down, top and bottom rows only calculate") {
     val nums = List(3, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 1, 1)
-    assert(move("down", nums) === List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2))
+    assert(move("down", nums) === (List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2), 12))
   }
 
   /*
@@ -127,7 +127,7 @@ class GameTest extends FunSuite {
    */
   test("move down, middle 2 rows only calculate") {
     val nums = List(0, 0, 0, 0, 3, 1, 1, 1, 3, 1, 1, 1, 0, 0, 0, 0)
-    assert(move("down", nums) === List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2))
+    assert(move("down", nums) === (List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 2, 2), 12))
   }
 
   /*
@@ -138,7 +138,7 @@ class GameTest extends FunSuite {
    */
   test("move left, all cells calculate") {
     val nums = List(3, 3, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
-    assert(move("left", nums) === List(6, 2, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0))
+    assert(move("left", nums) === (List(6, 2, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0), 32))
   }
 
   /*
@@ -149,7 +149,7 @@ class GameTest extends FunSuite {
    */
   test("move left, left and right columns only calculate") {
     val nums = List(3, 0, 0, 3, 3, 0, 0, 3, 1, 0, 0, 1, 1, 0, 0, 1)
-    assert(move("left", nums) === List(6, 0, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0))
+    assert(move("left", nums) === (List(6, 0, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0), 16))
   }
 
   /*
@@ -160,7 +160,7 @@ class GameTest extends FunSuite {
    */
   test("move left, middle 2 columns only calculate") {
     val nums = List(0, 3, 3, 0, 0, 3, 3, 0, 0, 1, 1, 0, 0, 1, 1, 0)
-    assert(move("left", nums) === List(6, 0, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0))
+    assert(move("left", nums) === (List(6, 0, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0), 16))
   }
 
   ////////
@@ -172,7 +172,7 @@ class GameTest extends FunSuite {
    */
   test("move right, all cells calculate") {
     val nums = List(3, 3, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
-    assert(move("right", nums) === List(0, 0, 6, 2, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4))
+    assert(move("right", nums) === (List(0, 0, 6, 2, 0, 0, 4, 4, 0, 0, 4, 4, 0, 0, 4, 4), 32))
   }
 
   /*
@@ -183,7 +183,7 @@ class GameTest extends FunSuite {
    */
   test("move right, right and right columns only calculate") {
     val nums = List(3, 0, 0, 3, 3, 0, 0, 3, 1, 0, 0, 1, 1, 0, 0, 1)
-    assert(move("right", nums) === List(0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 2))
+    assert(move("right", nums) === (List(0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 2), 16))
   }
 
   /*
@@ -194,28 +194,28 @@ class GameTest extends FunSuite {
    */
   test("move right, middle 2 columns only calculate") {
     val nums = List(0, 3, 3, 0, 0, 3, 3, 0, 0, 1, 1, 0, 0, 1, 1, 0)
-    assert(move("right", nums) === List(0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 2))
+    assert(move("right", nums) === (List(0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 2), 16))
   }
 
   test("move left, insert random 2") {
     val nums = List(0, 3, 3, 0, 0, 3, 3, 0, 0, 1, 1, 0, 0, 1, 1, 0)
     val moveL = move("left", nums)
-    assert(insertRandom(moveL).filter(_ == 0).length == 11
-      && insertRandom(moveL).filter(_ == 2).length == 3)
+    assert(insertRandom(moveL._1).filter(_ == 0).length == 11
+      && insertRandom(moveL._1).filter(_ == 2).length == 3)
   }
 
   test("move right, insert random 2") {
     val nums = List(0, 3, 3, 0, 0, 3, 3, 0, 0, 1, 1, 0, 0, 1, 1, 0)
     val moveR = move("right", nums)
-    assert(insertRandom(moveR).filter(_ == 0).length == 11
-      && insertRandom(moveR).filter(_ == 2).length == 3)
+    assert(insertRandom(moveR._1).filter(_ == 0).length == 11
+      && insertRandom(moveR._1).filter(_ == 2).length == 3)
   }
 
   test("move down, insert random 2") {
     val nums = List(0, 3, 3, 0, 0, 3, 3, 0, 0, 1, 1, 0, 0, 1, 1, 0)
     val moveD = move("down", nums)
-    assert(insertRandom(moveD).filter(_ == 0).length == 11
-      && insertRandom(moveD).filter(_ == 2).length == 3)
+    assert(insertRandom(moveD._1).filter(_ == 0).length == 11
+      && insertRandom(moveD._1).filter(_ == 2).length == 3)
   }
 
   test("insert random on full list") {

@@ -25,18 +25,18 @@ object Game {
 
   private def right(nums: List[Int]): List[List[Int]] = nums.grouped(4).toList
 
-  def calc(nums: List[Int]): List[Int] = {
-    def calcAcc(nextNums: List[Int], numsAcc: List[Int]): List[Int] = nextNums match {
-      case List() => numsAcc.reverse.padTo(4, 0).reverse
+  def calc(nums: List[Int]): (List[Int], Int) = {
+    def calcAcc(nextNums: List[Int], numsAcc: List[Int], scoreAcc: Int): (List[Int], Int) = nextNums match {
+      case List() => (numsAcc.reverse.padTo(4, 0).reverse, scoreAcc)
       case x :: xs =>
-        if (xs.isEmpty || x != xs.head) calcAcc(xs, x :: numsAcc)
-        else calcAcc(xs.tail, (x + xs.head) :: numsAcc)
+        if (xs.isEmpty || x != xs.head) calcAcc(xs, x :: numsAcc, scoreAcc)
+        else calcAcc(xs.tail, (x + xs.head) :: numsAcc, scoreAcc + (x + xs.head))
     }
-    calcAcc(nums.filter(p => p != 0).reverse, List())
+    calcAcc(nums.filter(p => p != 0).reverse, List(), 0)
   }
 
   //TODO: generalize this pattern matching
-  def move(direction: String, nums: List[Int]): List[Int] = {
+  def move(direction: String, nums: List[Int]): (List[Int], Int) = {
     val sum = (for {
       x <- direction match {
         case "up" => up(nums)
@@ -44,23 +44,29 @@ object Game {
         case "left" => left(nums)
         case "right" => right(nums)
       }
-    } yield (calc(x))).flatten
+    } yield (calc(x))).unzip
 
+    val m = (sum._1.flatten, sum._2.sum)
+    
     direction match {
-      case "up" => up(sum).flatten.reverse
-      case "down" => down(sum).flatten
-      case "right" => right(sum).flatten
-      case "left" => left(sum).flatten
+      case "up" => (up(sum._1.flatten).flatten.reverse, sum._2.sum)
+      case "down" => (down(sum._1.flatten).flatten, sum._2.sum)
+      case "right" => (right(sum._1.flatten).flatten, sum._2.sum)
+      case "left" => (left(sum._1.flatten).flatten, sum._2.sum)
     }
   }
   
   def insertRandom(nums: List[Int]): List[Int] = {
     val zeros = nums.zipWithIndex.filter(_._1 == 0).map(_._2)
-    
+
     if (zeros.nonEmpty) nums updated (zeros(random.nextInt(zeros.length - 1)), 2)
     else nums
   }
   
-  def next(direction: String, nums: List[Int]) = insertRandom(move(direction, nums))
+  def next(direction: String, nums: List[Int]) = {
+    val nextNums = move(direction, nums)
+    if(nums != nextNums) (insertRandom(nextNums._1), nextNums._2)
+    else (nums, 0)
+  }
   
 }
