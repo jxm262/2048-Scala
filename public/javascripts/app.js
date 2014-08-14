@@ -7,6 +7,12 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 
 (function(){
 	
+	if (localStorage.getItem("highScore") === null) {
+		localStorage.highScore = 0;
+	}else{
+		$("#highscore").text(localStorage.highScore);
+	}
+
 	//init
 	move("up");
 	
@@ -42,8 +48,22 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 	function updateScore(score){
 		var newScore = parseInt($("#score").text(), 10) + parseInt(score, 10);
 		$("#score").text(newScore);
+		updateHighScore(newScore);
 	};
 	
+	function updateHighScore(score){
+		if(score > localStorage.highScore){
+			localStorage.highScore = score;
+			$("#highscore").text(localStorage.highScore);
+		}
+	};
+	
+	$("#reset").click(function(){
+		nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+		move("up");
+		$("#score").text(0);
+	});
+
 	function updateGrid(nums){
 		$("h1").each(function(idx){
 			var num = (nums[idx] == 0) ? '' : nums[idx];
