@@ -59,7 +59,7 @@ object Game {
   def insertRandom(nums: List[Int]): List[Int] = {
     val zeros = nums.zipWithIndex.filter(_._1 == 0).map(_._2)
 
-    if (zeros.nonEmpty) nums updated (zeros(random.nextInt(zeros.length - 1)), 2)
+    if (zeros.nonEmpty) nums updated (zeros(random.nextInt(zeros.length)), 2)
     else nums
   }
   

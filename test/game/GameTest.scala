@@ -9,7 +9,6 @@ class GameTest extends FunSuite {
   import Game._
 
   trait testLists {
-    val nums1 = List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
     val nums2 = List(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
     val nums3 = List(2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3)
     val nums4 = List(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
@@ -19,7 +18,8 @@ class GameTest extends FunSuite {
 
     val numsd = List(3, 1, 1, 1, 3, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2)
   }
-
+    
+    
   /*
    	 3, 1, 1, 1  to  6, 2, 2, 2
 	 3, 1, 1, 1		 4, 4, 4, 4
@@ -216,6 +216,11 @@ class GameTest extends FunSuite {
     val moveD = move("down", nums)
     assert(insertRandom(moveD._1).filter(_ == 0).length == 11
       && insertRandom(moveD._1).filter(_ == 2).length == 3)
+  }
+  
+  test("insert random on list of 15 elements") {
+	  val nums = List(1, 22, 3, 4, 5, 6, 7, 8, 9, 0, 11, 12, 13, 14, 15, 16)
+	  assert(insertRandom(nums).filter(_ == 2).length === 1)
   }
 
   test("insert random on full list") {
