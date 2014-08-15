@@ -1,12 +1,11 @@
 package game
 
-
 import scala.util.Random
 
 object Game {
 
   val random = new Random
-    
+
   def printNums(l: List[Int]) = for (x <- l.grouped(4).toList) {
     println(x mkString ",\t")
   }
@@ -47,7 +46,7 @@ object Game {
     } yield (calc(x))).unzip
 
     val m = (sum._1.flatten, sum._2.sum)
-    
+
     direction match {
       case "up" => (up(sum._1.flatten).flatten.reverse, sum._2.sum)
       case "down" => (down(sum._1.flatten).flatten, sum._2.sum)
@@ -55,18 +54,31 @@ object Game {
       case "left" => (left(sum._1.flatten).flatten, sum._2.sum)
     }
   }
-  
-  def insertRandom(nums: List[Int]): List[Int] = {
+
+  def insertRandom(nums: List[Int], num: Int): List[Int] = {
     val zeros = nums.zipWithIndex.filter(_._1 == 0).map(_._2)
 
-    if (zeros.nonEmpty) nums updated (zeros(random.nextInt(zeros.length)), 2)
+    if (zeros.nonEmpty) nums updated (zeros(random.nextInt(zeros.length)), num)
     else nums
   }
-  
-  def next(direction: String, nums: List[Int]) = {
-    val nextNums = move(direction, nums)
-    if(nums != nextNums) (insertRandom(nextNums._1), nextNums._2)
-    else (nums, 0)
+
+  def next(direction: String, nums: List[Int], mode: Int) = {
+    def nextMove = {
+      val nextNums = move(direction, nums)
+      mode match {
+        case 1 => (insertRandom(nextNums._1, 2), nextNums._2)
+        case 2 =>
+          if (nums != nextNums._1) (insertRandom(nextNums._1, 2), nextNums._2)
+          else (nums, 0)
+        case 3 =>
+          if (nums.count(_ == 1024) != nextNums._1.count(_ == 1024) && nextNums._1.contains(1024))
+            (insertRandom(nextNums._1, 99999), nextNums._2)
+          else if (nums != nextNums._1) (insertRandom(nextNums._1, 2), nextNums._2)
+          else (nums, 0)
+      }
+    }
+    if (nums.sum == 0) (insertRandom(nums, 2), 0)
+    else nextMove
   }
-  
+
 }

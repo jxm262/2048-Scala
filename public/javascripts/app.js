@@ -28,12 +28,11 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 	function move(direction){
 		$.ajax({
 		  type: "POST",
-		  url: "/games/2048-Scala/move",
+		  url: "/2048-Scala/move",
 		  contentType: "application/json; charset=utf-8",
-		  data: JSON.stringify({direction: direction, numbers: nums}),
+		  data: JSON.stringify({direction: direction, numbers: nums, mode: 3}),
 		  dataType: "json",
 		  success: function(data, textStatus, jqXHR){
-			  window.justin = data;
 			  nums = data.numbers;
 			  updateGrid(nums);
 			  updateScore(data.score);
@@ -69,8 +68,12 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 			var num = (nums[idx] == 0) ? '' : nums[idx];
 			
 			$(this).parent().css("background-color", getColor(num));
-			$(this).replaceWith("<h1>" + num + "</h1>");
+			$(this).replaceWith("<h1>" + checkForBrick(num) + "</h1>");
 		});
+	};
+	
+	function checkForBrick(num){
+		return (num == 99999) ? "" : num
 	};
 	
 	//TODO this is pretty jacked up, but its getting late.  Redo this
@@ -83,6 +86,10 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 		var g = 250;
 		var b = 250;
 		 
+		if(num == 99999){
+			return shade(85, 85, 85);
+		}
+		
 		if(colorMultiple == 0){
 			return shade(r-40, g-40, b-40);
 		}
@@ -98,7 +105,6 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 		}
 		
 	};
-	
 })();
 
 var step = 0;

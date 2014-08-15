@@ -200,33 +200,42 @@ class GameTest extends FunSuite {
   test("move left, insert random 2") {
     val nums = List(0, 3, 3, 0, 0, 3, 3, 0, 0, 1, 1, 0, 0, 1, 1, 0)
     val moveL = move("left", nums)
-    assert(insertRandom(moveL._1).filter(_ == 0).length == 11
-      && insertRandom(moveL._1).filter(_ == 2).length == 3)
+    assert(insertRandom(moveL._1, 2).filter(_ == 0).length == 11
+      && insertRandom(moveL._1, 2).filter(_ == 2).length == 3)
   }
 
   test("move right, insert random 2") {
     val nums = List(0, 3, 3, 0, 0, 3, 3, 0, 0, 1, 1, 0, 0, 1, 1, 0)
     val moveR = move("right", nums)
-    assert(insertRandom(moveR._1).filter(_ == 0).length == 11
-      && insertRandom(moveR._1).filter(_ == 2).length == 3)
+    assert(insertRandom(moveR._1, 2).filter(_ == 0).length == 11
+      && insertRandom(moveR._1, 2).filter(_ == 2).length == 3)
   }
 
   test("move down, insert random 2") {
     val nums = List(0, 3, 3, 0, 0, 3, 3, 0, 0, 1, 1, 0, 0, 1, 1, 0)
     val moveD = move("down", nums)
-    assert(insertRandom(moveD._1).filter(_ == 0).length == 11
-      && insertRandom(moveD._1).filter(_ == 2).length == 3)
+    assert(insertRandom(moveD._1, 2).filter(_ == 0).length == 11
+      && insertRandom(moveD._1, 2).filter(_ == 2).length == 3)
   }
   
   test("insert random on list of 15 elements") {
 	  val nums = List(1, 22, 3, 4, 5, 6, 7, 8, 9, 0, 11, 12, 13, 14, 15, 16)
-	  assert(insertRandom(nums).filter(_ == 2).length === 1)
+	  assert(insertRandom(nums, 2).filter(_ == 2).length === 1)
   }
 
   test("insert random on full list") {
     val nums = List(4, 3, 3, 4, 4, 3, 3, 4, 4, 1, 1, 4, 4, 1, 1, 4)
-    assert(insertRandom(nums).filter(_ == 2).length === 0)
+    assert(insertRandom(nums, 2).filter(_ == 2).length === 0)
   }
+  
+  test("insert 99999 brick on new occurrence of 1024") {
+    val nums = List(512, 0, 0, 0, 512, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0)
+    assert(next("up", nums, 3)._1.contains(99999))
+    
+    val numsHas1024 = List(1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0)
+    assert(!next("up", numsHas1024, 3)._1.contains(99999))
+  }
+  
 } 
 
 

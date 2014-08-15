@@ -8,15 +8,16 @@ import play.api.libs.functional.syntax._
 
 object Application extends Controller {
 
-  val gameRequest: Reads[(String, List[Int])] = {
+  val gameRequest: Reads[(String, List[Int], Int)] = {
     (JsPath \ "direction").read[String] and
-    (JsPath \ "numbers").read[List[Int]]
+    (JsPath \ "numbers").read[List[Int]] and
+    (JsPath \ "mode").read[Int]
   }.tupled
   
   def move = Action(parse.json) { request => 
    request.body.validate(gameRequest).map{ 
-      case (direction, numbers) => {
-    	  val nextNums = next(direction, numbers)
+      case (direction, numbers, mode) => {
+    	  val nextNums = next(direction, numbers, mode)
     	  Ok(Json.obj("numbers" -> nextNums._1, "score" -> nextNums._2 ))  
       }
     }.recoverTotal{
