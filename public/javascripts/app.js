@@ -13,6 +13,25 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 		$("#highscore").text(localStorage.highScore);
 	}
 
+	var modes = {
+			"Easy": 1,
+			"Medium": 2,
+			"Hard": 3
+	};
+	
+	var mode = 2;
+	
+	
+	$("body").on("click", "#mode .btn", function(e){
+		//not the right way to do this
+		$("#mode").children().each(function(){ 
+			   $(this).removeClass("active");
+			});
+		
+		$(this).toggleClass("active");
+		mode = modes[$(this).text()];
+	});
+	
 	//init
 	move("up");
 	
@@ -30,7 +49,7 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 		  type: "POST",
 		  url: "/2048-Scala/move",
 		  contentType: "application/json; charset=utf-8",
-		  data: JSON.stringify({direction: direction, numbers: nums, mode: 3}),
+		  data: JSON.stringify({direction: direction, numbers: nums, mode: mode}),
 		  dataType: "json",
 		  success: function(data, textStatus, jqXHR){
 			  nums = data.numbers;
@@ -64,11 +83,11 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 	});
 
 	function updateGrid(nums){
-		$("h1").each(function(idx){
+		$("h2").each(function(idx){
 			var num = (nums[idx] == 0) ? '' : nums[idx];
 			
 			$(this).parent().css("background-color", getColor(num));
-			$(this).replaceWith("<h1>" + checkForBrick(num) + "</h1>");
+			$(this).replaceWith("<h2>" + checkForBrick(num) + "</h2>");
 		});
 	};
 	
@@ -105,6 +124,10 @@ var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 		}
 		
 	};
+
+
+	
+	
 })();
 
 var step = 0;
