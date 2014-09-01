@@ -1,0 +1,31 @@
+@(nums: List[Int], score: Int)
+
+@display(num: Int) = {
+	<div class="col-xs-3">
+		<div class="dummy"></div>
+    	<div class="in text-center" id="te">
+    		<h2>@num</h2>
+		</div>
+	</div>
+}
+
+@main(score) {
+			<div class="row">   
+				<div class="col-xs-7"> 		
+					@for((num, idx) <- nums.zipWithIndex){
+						@display(num)
+					}
+				</div>
+				<div class="col-xs-5"> 		
+					<div class="row" style="margin-top: 30px;">
+						<div class="col-xs-offset-2 col-xs-6">
+							<button type="button" class="btn btn-success btn-responsive center-block" id="reset">Reset Game</button>
+						</div>
+					</div>				
+				</div>	
+			</div><!-- /.row -->
+			
+			<div class="row">
+	
+			</div>
+}

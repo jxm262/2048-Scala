@@ -1,0 +1,187 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>@title</title>
+        
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/app.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    	<!--[if lt IE 9]>
+      		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+    </head>
+    
+    <body>
+        @*original default page - @content *@
+        
+        
+        <!-- 
+        	<div class="col-sm-1 col-md-2" style="background-color: red"><img src="@routes.Assets.at("images/placeholder.gif")" class="img-rounded"></div>
+        -->
+        
+        
+        
+		<div class="container">
+		
+			<div class="row">
+        		
+        		
+			<div class="page-header">
+        		<h1>2048 in Scala!</h1>
+</div>
+        		
+        		</div>
+        		
+        		
+			<div class="row">   
+			<div class="col-xs-7"> 		
+    		
+			<div class="row no-gutter">
+				<div class="col-xs-3">
+    				<div class="dummy"></div>
+    				<div class="in text-center" id="te"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+    				<div class="dummy"></div>
+    				<div class="in text-center" id="a"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+    				<div class="dummy"></div>
+    				<div class="in text-center" id="b"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+    				<div class="dummy"></div>
+    				<div class="in text-center" id="c"><h2></h2></div>
+				</div>			 
+			</div>
+			
+			<div class="row no-gutter">
+				<div class="col-xs-3">
+    				<div class="dummy"></div>
+    				<div class="in text-center" id="d"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+    				<div class="dummy"></div>
+    				<div class="in text-center" id="e"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+    				<div class="dummy"></div>
+    				<div class="in text-center" id="f"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+    				<div class="dummy"></div>
+    				<div class="in text-center"><h2></h2></div>
+				</div>
+			</div>
+			
+			<div class="row no-gutter">
+				<div class="col-xs-3">
+    				<div class="dummy"></div>
+    				<div class="in text-center"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+	    			<div class="dummy"></div>
+    				<div class="in text-center"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+	    			<div class="dummy"></div>
+    				<div class="in text-center"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+	    			<div class="dummy"></div>
+    				<div class="in text-center"><h2></h2></div>
+				</div>			
+			</div>
+		
+			<div class="row no-gutter">
+				<div class="col-xs-3">
+    				<div class="dummy"></div>
+    				<div class="in text-center"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+	    			<div class="dummy"></div>
+    				<div class="in text-center"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+	    			<div class="dummy"></div>
+    				<div class="in text-center"><h2></h2></div>
+				</div>
+				<div class="col-xs-3">
+	    			<div class="dummy"></div>
+    				<div class="in text-center"><h2></h2></div>
+				</div>									
+			</div>
+			
+			</div>
+			
+			<div class="col-xs-5"> 	
+			<div class="row" style="margin-top: 20px">
+				<div class="col-xs-offset-2 col-xs-10">	<!-- TODO: stack these buttons on smaller screen -->
+					<div class="btn-group btn-group-lg center-block" id="mode">
+	  					<button type="button" class="btn btn-primary" id="one">Easy</button>
+  						<button type="button" class="btn btn-primary active" id="two">Medium</button>
+  						<button type="button" class="btn btn-primary">Hard</button>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 100px; margin-left: 10px;">
+				<div class="col-xs-offset-3 col-xs-4">
+					<div class="panel panel-primary center-block">
+  						<div class="panel-heading">
+    						<h3 class="panel-title text-center">Score</h3>
+  						</div>
+  						<div class="panel-body text-center" id="score">
+	    					0
+  						</div>
+					</div>
+				</div>
+			</div>			
+			<div class="row" style="margin-top: 10px; margin-left: 10px;">
+				<div class="col-xs-offset-3 col-xs-4">
+					<div class="panel panel-primary">
+  						<div class="panel-heading">
+    						<h3 class="panel-title text-center">High Score</h3>
+  						</div>
+  						<div class="panel-body text-center" id="highscore">
+	    					0
+  						</div>
+					</div>
+				</div>
+			</div>				
+			<div class="row" style="margin-top: 30px; margin-left: 10px;">
+				<div class="col-xs-offset-3 col-xs-4">
+					<button type="button" class="btn btn-success center-block" id="reset">Reset Game</button>
+				</div>
+			</div>				
+			</div>	
+						
+						
+			</div><!-- /.row -->
+			
+			
+			
+			<!--  -->    		
+    		
+    		
+    		
+
+	
+		</div>
+
+    </body>
+    
+  	<!-- JS Files at bottom -->  
+    <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+	<script src="@routes.Assets.at("javascripts/app.js")" type="text/javascript"></script>
+</html>
