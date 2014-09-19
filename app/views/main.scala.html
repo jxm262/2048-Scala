@@ -25,9 +25,9 @@
     <body>
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 page-header">
+				<div class="col-xs-12">
     	    		<h1>2048 in Scala!</h1>
-				</div>
+    	    	</div>
         	</div>
     	    <div class="row">
     	    	<div class="col-xs-2">
@@ -35,8 +35,7 @@
 		  				<div class="panel-heading">
     						<h3 class="panel-title text-center">Score</h3>
   						</div>
-  						<div class="panel-body text-center" id="score">
-  						</div>
+  						<div class="panel-body text-center" id="score"></div>
 					</div>
 				</div>	
     	    	<div class="col-xs-2">
@@ -44,25 +43,20 @@
 		  				<div class="panel-heading">
     						<h3 class="panel-title text-center">High Score</h3>
   						</div>
-  						<div class="panel-body text-center" id="highscore">
-						</div>
+  						<div class="panel-body text-center" id="highscore"></div>
 					</div>
 				</div>	
-				<div class="col-xs-offset-4 col-xs-4">
-					<div class="btn-group center-block" id="mode">
-		  				<button type="button" class="btn btn-primary btn-responsive" id="one">Easy</button>
-  						<button type="button" class="btn btn-primary btn-responsive active" id="two">Medium</button>
-  						<button type="button" class="btn btn-primary btn-responsive">Hard</button>
-					</div>
-				</div>	
+
 			</div>
 				        	
-			@content
+				@content
 			
 		</div>
 	</body>
     
   	<!-- JS Files at bottom -->  
     <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+    <!-- http://www.netcu.de/jquery-touchwipe-iphone-ipad-library -->
+	<script src="@routes.Assets.at("javascripts/jquery.touchwipe.min.js")" type="text/javascript"></script>
 	<script src="@routes.Assets.at("javascripts/app.js")" type="text/javascript"></script>
 </html>

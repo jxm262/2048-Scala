@@ -3,13 +3,13 @@
 # ~~~~
 
 # Home page
-GET      /                           	 controllers.Application.index2
-POST     /move                           controllers.Application.move
-GET     /dmove                           controllers.Application.dmove
+GET      /                           	  controllers.Application.index2
+POST     /move                            controllers.Application.move
+GET      /dmove                           controllers.Application.dmove
 
-GET     /tasks                           controllers.Application.tasks
+GET      /tasks                           controllers.Application.tasks
 POST     /tasks                           controllers.Application.newTask
-POST     /tasks/:id/delete                           controllers.Application.deleteTask(id: Long)
+POST     /tasks/:id/delete                controllers.Application.deleteTask(id: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

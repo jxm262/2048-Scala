@@ -9,6 +9,24 @@
     line-height: 1;
     border-radius:3px;
   }
+  
+  h2{
+  	margin-top: 7px;
+  	font-size: 150%;
+ 	font-weight: bold;
+  }  
+  
+  .in {
+	position: absolute;
+	    top: 0;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+	    border: 2px solid #555;
+	}  
+	.cell{
+		height:50px;
+	}
 }
 
 @media (min-width: 769px) and (max-width: 992px) {
@@ -17,6 +35,36 @@
     font-size:90%;
     line-height: 1.2;
   }
+  
+  h2{
+  	font-size: 200%;
+ 	font-weight: bold;
+  }  
+
+.in {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 3px solid #555;
+}  
+}
+
+@media (min-width: 993px) {
+  h2{
+  	font-size: 450%;
+ 	font-weight: bold;
+  }
+  
+.in {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 6px solid #555;
+  }  
 }
 
 body{
@@ -29,55 +77,11 @@ h1{
  font-weight: bold;
 }
 
-h2{
- font-size: 450%;
- font-weight: bold;
-}
 
 .dummy {
     margin-top: 100%;
 }
 
-.thumbnail {
-    position: absolute;
-    top: 15px;
-    bottom: 0;
-    left: 15px;
-    right: 0;
-    text-align:center;
-    padding-top:calc(50% - 20px);
-}
-
-.in {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border: 6px solid #555;
-}
-.red{
-    background-color: red;
-}
-.green{
-    background-color: green;
-}
-.yellow{
-    background-color: yellow;
-}
-.blue{
-    background-color: blue;
-}
-.gray{
-    background-color: gray;
-}
-.magenta{
-    background-color: magenta;
-}
-
-.no-gutter [class*="-6"] {
-    padding-left:0;
-}
 
 .center-x {
 	text-align: center;
