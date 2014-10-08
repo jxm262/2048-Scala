@@ -1,5 +1,5 @@
-(function(){
-	var randomPos = (Math.ceil(Math.random() * 16)) - 1 ;
+//(function(){
+	var randomPos = Math.ceil(Math.random() * 16);
 	var nums = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 	
 	if (localStorage.getItem("highScore") === null) {
@@ -15,7 +15,6 @@
 	};
 	
 	var mode = 2;
-	
 	
 	$("body").on("click", "#mode .btn", function(e){
 		//not the right way to do this
@@ -49,22 +48,69 @@
 	     preventDefaultEvents: true
 	});
 
+	function scoreInArray(score, scoresArray){
+		return (scoresArray.filter(function(elem) { return elem.score != score }).length == 0) ? true : false;
+	};
+	
+	function checkGameOver(data){
+		if(isBoardFull(data.numbers)){
+			var currScore = data.score;
+			
+			var directions = ["left", "right", "up", "down"];
+			var p = $.when(1); // empty promise
+			var results = [];
+			
+			directions.forEach(function(el, index){
+			    p = p.then(function(){
+			        return moveIt(data.numbers, el);
+			    })
+			    .then(function(data){
+			        results[index] = data; // save the data
+			    });
+			});
+			
+			p.then(function(){
+			    // all promises done, results contains the return values
+				if(scoreInArray(currScore, results)){
+					alert("Game is Over!!  Reset to replay");
+				}
+			});
+		}
+	};
+	
+	function isBoardFull(numbers){
+		return ($.inArray(0, numbers) == -1) ? true : false;	
+	};
+	
+	function moveIt(currNums, direction){
+		return $.ajax({
+		  type: "POST",
+		  url: "/2048-Scala/move",
+		  contentType: "application/json; charset=utf-8",
+		  data: JSON.stringify({direction: direction, numbers: currNums, mode: mode}),
+		  dataType: "json",
+		  success: function(){},
+		  error: error
+		});
+	};	
+	
 	function move(direction){
-		$.ajax({
+		return $.ajax({
 		  type: "POST",
 		  url: "/2048-Scala/move",
 		  contentType: "application/json; charset=utf-8",
 		  data: JSON.stringify({direction: direction, numbers: nums, mode: mode}),
 		  dataType: "json",
-		  success: function(data, textStatus, jqXHR){
+		  success: function(data){
+			  console.log("returned data - " + data.numbers + "  " + data.score);
+			  
+			  checkGameOver(data);
+			  
 			  nums = data.numbers;
 			  updateGrid(nums);
 			  updateScore(data.score);
 		  },
-		  error: function(jqXHR, textStatus, errorThrown){
-			  console.log("fail");
-			  console.log(errorThrown);
-		  }
+		  error: error
 		});
 	};
 	
@@ -135,4 +181,12 @@
 		
 	};
 	
-})();
+	function error(jqXHR, textStatus, errorThrown) {
+		alert("there was an error.  Check js console for details");
+		console.log("Error!");
+		console.log(textStatus);
+		console.log(errorThrown);
+		console.log(jqXHR);
+	};
+	
+// })();
