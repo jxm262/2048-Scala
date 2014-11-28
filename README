@@ -1,4 +1,6 @@
-This is your new Play application
+2048 implemented in Scala
 =====================================
 
-This file will be packaged with your application, when using `play dist`.
+I've added 3 levels of difficulty to the game (easy | medium | hard)
+
+[Try it out here!](http://jmaat.me)
