@@ -34,7 +34,7 @@ returns
 [2,4,3,4,,9,7,7,8,8,5,8,5,0,2,0,3]
 
 
-And I use Jquery to reset the board - 
+And I use Jquery to reset the board -   
  2, 4, 3, 4  
  9, 7, 7, 8  
  8, 5, 8, 5  
